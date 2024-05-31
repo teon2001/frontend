@@ -1,0 +1,74 @@
+.modal-content {
+    padding: 20px;
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: space-between;
+  }
+
+.main-container {
+    padding: 20px;
+  }
+  
+  .gallery-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .gallery-container {
+    flex: 1;
+    overflow: hidden;
+  }
+  
+  .recommendation-form {
+    margin-bottom: 20px;
+  }
+  
+  .calories-input {
+    padding: 5px;
+    margin-right: 10px;
+  }
+  
+  .styled-button {
+    margin: 10px 0;
+  }
+  
+  .table-container {
+    margin-top: 20px;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .pagination span {
+    margin: 0 10px;
+  }
+  
+  .search-input {
+    margin-bottom: 20px;
+    padding: 5px;
+  }
+  
+  .recommendation-container {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .recommendation-image {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+  }
+  
+  .recommendation-info {
+    margin-top: 10px;
+  }
+  
+  

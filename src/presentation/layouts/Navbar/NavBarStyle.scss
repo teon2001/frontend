@@ -1,0 +1,112 @@
+// @import './_variables.scss';
+
+.sidebar {
+    background-color: rgba(224, 228, 223, 0.595);
+    position: fixed; /* Fixează bara de navigare */
+    top: 0;
+    left: 0;
+    padding: 2rem 1rem;
+    width: 15rem; /* Setează lățimea barei de navigare */
+    height: 100vh;
+    transition: 0.5s all;
+    overflow-y: auto; /* Permite scroll-ul vertical dacă conținutul depășește înălțimea vizibilă */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Adaugă o umbră pentru un efect vizual plăcut */
+
+    .logoContainer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        h2.title {
+            font-size: 31.42px;
+            color: rgb(73, 195, 73);;
+            padding: 0 0 0 1rem;
+        }
+    }
+
+    .profileContainer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 3rem 0 0 0;
+
+        img {
+            width: auto;
+            height: 3rem;
+        }
+
+        .profileContents {
+            padding: 0 0 0 1rem;
+
+            p.name {
+                padding: 0;
+                margin: 0;
+                font-size: 16.7px;
+                color: rgb(72, 84, 72);;
+                text-transform: capitalize;
+                font-weight:  800;
+            }
+
+            p {
+                padding: 0;
+                margin: 0;
+                font-size: 13.9px;
+                color: #828282;
+                text-transform: lowercase;
+            }
+        }
+    }
+
+    .contentsContainer {
+        margin: 2rem 0 0 0;
+
+        ul {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            flex-direction: column;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            li {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                flex-direction: row;
+                margin: 0.75rem 0;
+                padding: 0.75rem 0;
+                width: 100%;
+                border-radius: 1rem;
+                cursor: pointer;
+
+                img {
+                    padding: 0 1rem 0 0.5rem;
+                }
+
+                a {
+                    text-decoration: none;
+                    color: #828282;
+                    font-size: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin: 0 0 0 0.5rem;
+                }
+            }
+
+            li.active {
+                background-color: #f4f9f4;
+
+                a {
+                    color: rgb(73, 195, 73);
+                }
+            }
+
+            li:hover {
+                background-color:#f2f2f2;
+                transition: 0.25s;
+            }
+        }
+    }
+}

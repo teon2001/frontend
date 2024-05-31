@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+
+
+$borderRadius: 1px;
+// $offset: 250%;
+$transitionEasing: cubic-bezier(.36,1,.62,.98);
+
+
+$background1: #433345;
+$background2: #344158;
+
+$yellow: #ED6A5E;
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: #fff;
+    margin: 0 !important;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* No horizontal scroll */
+}
+
+.app {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow-y: auto; /* Enable vertical scroll */
+
+    bottom: 0;
+    height: 100vh;
+    overflow-y: scroll;
+    background-image: url('../assets/img/food_wallpaper.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.form-block-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100vh;
+    &--is-login {
+        opacity: .92;
+        background-color: $background2;
+    }
+    &--is-register {
+        opacity: .94;
+        background-color: $background1;
+    }
+}
+
+.form-block {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Perfect center alignment */
+    width: 90%; /* Responsive width, max-width for larger screens */
+    max-width: 400px; /* Maximum width */
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.13);
+    border-radius: 2px; /* Updated for simplicity */
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Soft shadow for better visibility */
+}
+
+.form-block__header {
+    margin-bottom: 20px;
+    h1 {
+        font-size: 30px;
+        margin: 0 0 20px;
+    }
+}
+
+.form-block__toggle-block {
+    position: relative;
+    span {
+        font-size: 13px;
+        font-weight: 300;
+        color: rgba(255,255,255,.65);
+    }
+    .MuiFormControlLabel-root {
+        margin-left: 0; // Removes any default margin that might offset alignment.
+    }
+}
+
+.form-block__input-wrapper {
+    height: 100%;
+    position: relative;
+    margin-bottom: 2px;
+    .form-block--is-register & {
+        height: 100%;
+    }
+}
+
+.form-group {
+    &--register {
+        position: absolute;
+        top: 0;
+        // left: $offset;
+        width: 100%;
+    }
+}
+
+.form-group__input {
+    display: block;
+    font-size: 15px;
+    color: #fff;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+    padding:  12px 10px;
+    margin-bottom: 15px;
+    background: rgba(255,255,255,.25);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: $borderRadius;
+    &:focus {
+        outline: none;
+        border: 1px solid #fff;
+        background: transparent;
+    }
+    .form-group--login & {
+        opacity: 1;
+        .form-block--is-register & {
+            opacity: 0;
+        }
+    }
+    .form-group--register & {
+        opacity: 0;
+        .form-block--is-register & {
+            opacity: 1;
+        }
+    }
+}

@@ -1,0 +1,781 @@
+
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+
+body {
+    background-color: #89FAD0;
+    font-family: 'Lobster';
+}
+
+#carousel {
+    position: absolute;
+    height: 200px;
+    width: 810px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.arrow {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: rgb(175, 203, 187);
+    text-align: center;
+    font-size: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    color: #228291;
+    line-height: 30px;
+    margin-top: 85px;
+    z-index: 1000;
+}
+
+.arrow-right {
+    left: 780px;
+}
+
+.item {
+    text-align: center;
+    color: white;
+    font-size: 40px;
+    position: absolute;
+    transition: height 1s, width 1s, left 1s, margin-top 1s, line-height 1s, background-color 1s;
+}
+
+$level2-height: 150px;
+$level2-width: 110px;
+$level1-height: 180px;
+$level1-width: 130px;
+$level0-height: 200px;
+$level0-width: 150px;
+
+$level-2-left: 650px;
+$level-1-left: 500px;
+$level0-left: 330px;
+$level1-left: 180px;
+$level2-left: 50px;
+
+
+.level-2 {
+    height: $level2-height;
+    width: $level2-width;
+    line-height: $level2-height;
+    background-color: #228291;
+    left: $level-2-left;
+    margin-top: 25px;
+}
+
+.level-1 {
+    height: $level1-height;
+    width: $level1-width;
+    line-height: $level1-height;
+    background-color: #6796E5;
+    left: $level-1-left;
+    margin-top: 10px;
+}
+
+.level0 {
+    height: $level0-height;
+    width: $level0-width;
+    line-height: $level0-height;
+    background-color: #4EC9E1;
+    left: $level0-left;
+}
+
+.level1 {
+    height: $level1-height;
+    width: $level1-width;
+    line-height: $level1-height;
+    background-color: #6796E5;
+    margin-top: 10px;
+    left: $level1-left;
+}
+
+.level2 {
+    height: $level2-height;
+    width: $level2-width;
+    line-height: $level2-height;
+    background-color: #228291;
+    margin-top: 25px;
+    left: $level2-left;
+}
+
+.left-enter {
+    opacity: 0;
+    left: $level2-left - $level2-width;
+    height: $level2-height - 30;
+    width: $level2-width - 20;
+    line-height: $level2-height - 30;
+    margin-top: 40px;
+}
+
+.left-enter.left-enter-active {
+    opacity: 1;
+    left: $level2-left;
+    height: $level2-height;
+    width: $level2-width;
+    line-height: $level2-height;
+    margin-top: 25px;
+    transition: left 1s, opacity 1s, height 1s, width 1s, margin-top 1s, line-height 1s;
+}
+
+.left-leave {
+    opacity: 1;
+    left: $level-2-left;
+    height: $level2-height;
+    width: $level2-width;
+    line-height: $level2-height;
+    margin-top: 25px;
+}
+
+.left-leave.left-leave-active {
+    left: $level-2-left + $level2-width + 20;
+    opacity: 0;
+    height: $level2-height - 30;
+    line-height: 120px;
+    margin-top: 40px;
+    width: $level2-width - 20;
+    transition: left 1s, opacity 1s, height 1s, width 1s, margin-top 1s, line-height 1s;
+}
+
+.right-enter {
+    opacity: 0;
+    left: $level-2-left + $level2-width;
+    height: $level2-height - 30;
+    width: $level2-width - 20;
+    line-height: $level2-height - 30;
+    margin-top: 40px;
+}
+
+.right-enter.right-enter-active {
+    left: $level-2-left;
+    opacity: 1;
+    height: $level2-height;
+    margin-top: 25px;
+    line-height: $level2-height;
+    width: $level2-width;
+    transition: left 1s, opacity 1s, height 1s, width 1s, margin-top 1s, line-height 1s;
+}
+
+.right-leave {
+    left: $level2-left;
+    height: $level2-height;
+    opacity: 1;
+    margin-top: 25px;
+    line-height: $level2-height;
+    width: $level2-width;
+}
+
+.right-leave.right-leave-active {
+    left: $level2-left - $level2-width;
+    opacity: 0;
+    height: $level2-height - 30;
+    width: $level2-width - 20;
+    line-height: $level2-height - 30;
+    margin-top: 40px;
+    transition: left 1s, opacity 1s, height 1s, width 1s, margin-top 1s, line-height 1s;
+}
+
+.noselect {
+    -webkit-user-select: none; 
+     -khtml-user-select: none; 
+       -moz-user-select: none; 
+        -ms-user-select: none;  
+            user-select: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// .main-container {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     width: calc(100% - 250px); // Deduct sidebar width
+//     padding: 20px 0; // Space between navbar and content
+//     margin-left: auto;
+// }
+
+// .gallery-wrapper {
+//     display: flex;
+//     align-items: center;
+//     width: 80%; // Total container width
+//     position: relative;
+//     margin-top: 20px; // Space from profile container
+//     margin-bottom: 20px; // Space between galleries
+// }
+
+// .gallery-container {
+//     flex: 1;
+//     max-height: 250px; // Limit gallery container height
+//     overflow-y: auto; // Add vertical scroll if needed
+//     border: 2px solid #ccc; // Gallery border
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+// }
+
+// .gallery {
+//     display: flex;
+//     overflow-x: auto;
+//     scroll-behavior: smooth;
+//     width: 100%;
+//     height: 100%; // Ensure gallery occupies entire container
+// }
+
+// .food-item {
+//     flex: 0 0 20%; // Adjust item width to fit more on a row
+//     box-sizing: border-box;
+//     padding: 10px;
+//     text-align: center; // Center text
+// }
+
+// .food-image {
+//     width: 100%;
+//     height: 100px; // Set image height
+//     object-fit: cover; // Ensure proportional image cropping
+// }
+
+// .food-info h2 {
+//     font-size: 14px; // Decrease title size
+//     margin: 5px 0; // Adjust margins
+// }
+
+// .food-info p {
+//     font-size: 12px; // Decrease description size
+//     margin: 5px 0; // Adjust margins
+// }
+
+// .profile-container {
+//     width: 80%;
+//     padding: 10px;
+//     border: 2px solid #ccc; // Profile section border
+//     box-sizing: border-box;
+//     margin-bottom: 20px; // Space from gallery container
+// }
+
+// .recommendation-form {
+//     width: 80%;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     margin-top: 20px;
+//     margin-bottom: 20px; // Space from recommendation container
+// }
+
+// .recommendation-form input {
+//     padding: 10px;
+//     margin-right: 10px;
+//     border: 1px solid #ccc;
+//     border-radius: 5px;
+// }
+
+// .recommendation-form button {
+//     padding: 10px 20px;
+//     border: none;
+//     background-color: #007bff;
+//     color: white;
+//     border-radius: 5px;
+//     cursor: pointer;
+// }
+
+// .recommendation-form button:hover {
+//     background-color: #0056b3;
+// }
+
+// .recommendation-container {
+//     width: 80%;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     flex-direction: column;
+//     border: 2px solid #ccc; // Recommendation container border
+//     padding: 20px;
+//     background-color: #f9f9f9; // Recommendation container background
+// }
+
+// .recommendation-image {
+//     width: 100%;
+//     height: 200px; // Recommendation image size
+//     object-fit: cover; // Ensure proportional image cropping
+//     margin-bottom: 10px; // Space between image and text
+// }
+
+// .recommendation-info h2 {
+//     font-size: 16px; // Recommendation title size
+//     margin: 5px 0; // Adjust margins
+// }
+
+// .recommendation-info p {
+//     font-size: 14px; // Recommendation description size
+//     margin: 5px 0; // Adjust margins
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // .main-container {
+// //     display: flex;
+// //     flex-direction: column;
+// //     align-items: center;
+// //     width: 100%; // Utilizăm 100% din lățime disponibilă
+// //     padding: 20px 0; // Spațiu vertical
+// //     margin-left: auto;
+// //     margin-right: auto;
+// //     box-sizing: border-box;
+// //     overflow: hidden; // Prevenim overflow-ul accidental
+// // }
+
+// // .gallery-wrapper {
+// //     display: flex;
+// //     align-items: center;
+// //     width: 80%; // Lățimea containerului total
+// //     position: relative;
+// //     margin-top: 20px; // Spațiu față de containerul de profiluri
+// //     margin-bottom: 20px; // Spațiu între galerii
+// // }
+
+// // .gallery-container {
+// //     flex: 1;
+// //     height: 250px; // Înălțimea containerului galeriei
+// //     overflow: hidden;
+// //     border: 2px solid #ccc; // Chenarul pentru galerie
+// //     display: flex;
+// //     align-items: center;
+// //     justify-content: center;
+// // }
+
+// // .gallery {
+// //     display: flex;
+// //     overflow-x: auto;
+// //     scroll-behavior: smooth;
+// //     width: 100%;
+// //     height: 100%; // Asigurăm că galeria ocupă întreg containerul
+// // }
+
+// // .food-item {
+// //     flex: 0 0 20%; // Ajustăm lățimea elementelor pentru a afișa mai multe pe un rând
+// //     box-sizing: border-box;
+// //     padding: 10px;
+// //     text-align: center; // Centram textul
+// // }
+
+// // .food-image {
+// //     width: 100%;
+// //     height: 100px; // Fixăm înălțimea imaginii
+// //     object-fit: cover; // Asigurăm tăierea proporțională a imaginii
+// // }
+
+// // .food-info h2 {
+// //     font-size: 14px; // Micșorăm dimensiunea titlului
+// //     margin: 5px 0; // Ajustăm marginile
+// // }
+
+// // .food-info p {
+// //     font-size: 12px; // Micșorăm dimensiunea descrierii
+// //     margin: 5px 0; // Ajustăm marginile
+// // }
+
+// // .profile-container {
+// //     width: 80%;
+// //     padding: 10px;
+// //     border: 2px solid #ccc; // Chenar pentru secțiunea de profiluri
+// //     box-sizing: border-box;
+// //     margin-bottom: 20px; // Spațiu față de containerul galeriei
+// // }
+
+// // .recommendation-form {
+// //     width: 80%;
+// //     display: flex;
+// //     align-items: center;
+// //     justify-content: center;
+// //     margin-top: 20px;
+// //     margin-bottom: 20px; // Spațiu față de containerul de recomandare
+// // }
+
+// // .recommendation-form input {
+// //     padding: 10px;
+// //     margin-right: 10px;
+// //     border: 1px solid #ccc;
+// //     border-radius: 5px;
+// // }
+
+// // .recommendation-form button {
+// //     padding: 10px 20px;
+// //     border: none;
+// //     background-color: #007bff;
+// //     color: white;
+// //     border-radius: 5px;
+// //     cursor: pointer;
+// // }
+
+// // .recommendation-form button:hover {
+// //     background-color: #0056b3;
+// // }
+
+// // .recommendation-container {
+// //     width: 80%;
+// //     display: flex;
+// //     align-items: center;
+// //     justify-content: center;
+// //     flex-direction: column;
+// //     border: 2px solid #ccc; // Chenar pentru containerul de recomandare
+// //     padding: 20px;
+// //     background-color: #f9f9f9; // Fundal pentru containerul de recomandare
+// // }
+
+// // .recommendation-image {
+// //     width: 100%;
+// //     height: 200px; // Dimensiunea imaginii de recomandare
+// //     object-fit: cover; // Asigurăm tăierea proporțională a imaginii
+// //     margin-bottom: 10px; // Spațiu între imagine și text
+// // }
+
+// // .recommendation-info h2 {
+// //     font-size: 16px; // Dimensiunea titlului pentru recomandare
+// //     margin: 5px 0; // Ajustăm marginile
+// // }
+
+// // .recommendation-info p {
+// //     font-size: 14px; // Dimensiunea descrierii pentru recomandare
+// //     margin: 5px 0; // Ajustăm marginile
+// // }
+
+// .arrow {
+//     cursor: pointer;
+//     height: 120px;
+//     position: absolute;
+//     top: 50%;
+//     transform: translateY(-50%);
+//     transition: transform 0.1s;
+//     width: 80px;
+
+//     &-left {
+//         left: 10px; // Poziționăm săgeata în stânga
+
+//         .arrow-top,
+//         .arrow-bottom {
+//             background-color: #666;
+//             height: 4px;
+//             left: -5px;
+//             position: absolute;
+//             top: 50%;
+//             width: 100%;
+
+//             &:after {
+//                 background-color: #fff;
+//                 content: '';
+//                 height: 100%;
+//                 position: absolute;
+//                 top: 0;
+//                 transition: all 0.15s;
+//             }
+//         }
+
+//         .arrow-top {
+//             transform: rotate(-45deg);
+//             transform-origin: bottom left;
+
+//             &:after {
+//                 right: 100%;
+//                 left: 0;
+//                 transition-delay: 0s;
+//             }
+//         }
+
+//         .arrow-bottom {
+//             transform: rotate(45deg);
+//             transform-origin: top left;
+
+//             &:after {
+//                 right: 0;
+//                 left: 100%;
+//                 transition-delay: 0.15s;
+//             }
+//         }
+
+//         &:hover & {
+//             .arrow-top:after {
+//                 right: 0;
+//                 transition-delay: 0.15s;
+//             }
+
+//             .arrow-bottom:after {
+//                 left: 0;
+//                 transition-delay: 0s;
+//             }
+//         }
+//     }
+
+//     &-right {
+//         right: 10px; // Poziționăm săgeata în dreapta
+
+//         .arrow-top,
+//         .arrow-bottom {
+//             background-color: #666;
+//             height: 4px;
+//             left: -5px;
+//             position: absolute;
+//             top: 50%;
+//             width: 100%;
+
+//             &:after {
+//                 background-color: #fff;
+//                 content: '';
+//                 height: 100%;
+//                 position: absolute;
+//                 top: 0;
+//                 transition: all 0.15s;
+//             }
+//         }
+
+//         .arrow-top {
+//             transform: rotate(45deg);
+//             transform-origin: bottom right;
+
+//             &:after {
+//                 left: 100%;
+//                 right: 0;
+//                 transition-delay: 0s;
+//             }
+//         }
+
+//         .arrow-bottom {
+//             transform: rotate(-45deg);
+//             transform-origin: top right;
+
+//             &:after {
+//                 left: 0;
+//                 right: 100%;
+//                 transition-delay: 0.15s;
+//             }
+//         }
+
+//         &:hover & {
+//             .arrow-top:after {
+//                 left: 0;
+//                 transition-delay: 0.15s;
+//             }
+
+//             .arrow-bottom:after {
+//                 right: 0;
+//                 transition-delay: 0s;
+//             }
+//         }
+//     }
+
+//     &:active {
+//         transform: translateY(-50%) scale(0.9);
+//     }
+// }

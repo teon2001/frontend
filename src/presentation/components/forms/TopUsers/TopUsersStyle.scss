@@ -1,0 +1,55 @@
+/* TopUsersForm.css */
+
+.table-container {
+    width: 80%;
+    margin: 20px auto;
+  }
+  
+  .table-container table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table-container th, .table-container td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #dee2e6;
+  }
+  
+  .table-container thead {
+    background-color: #343a40;
+    color: white;
+  }
+  
+  .table-container tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+  }
+  
+  .table-container tbody tr:hover {
+    background-color: #e9ecef;
+  }
+  
+  .search-input {
+    margin: 20px auto;
+    display: block;
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .pagination span {
+    margin: 0 10px;
+  }
+  
+  .styled-button {
+    margin: 5px;
+  }
+  
