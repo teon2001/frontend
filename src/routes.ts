@@ -1,6 +1,3 @@
-import { Payment } from "@mui/icons-material";
-import FoodDetails from "@presentation/components/forms/FoodDetails/FoodDetailsForm";
-
 /**
  * Here you can add more routes as constant to be used for routing within the application.
  */

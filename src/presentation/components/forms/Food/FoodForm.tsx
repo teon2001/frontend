@@ -3,271 +3,139 @@ import { FoodDTO, FoodDTOListRequestResponse, UserRoleEnum } from "@infrastructu
 import 'react-toastify/dist/ReactToastify.css';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useFoodApi } from '@infrastructure/apis/api-management';
-
+import avatar4 from '@presentation/assets/img/9334407.jpg';
 import "./FoodStyle.scss";
+import { Box } from '@mui/material';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 interface CarouselProps {
-  items: FoodDTO[];
+  items: Order[];
+  images: { [key: string]: string };
 }
 
-const Carousel: React.FC<CarouselProps> = ({ items }) => {
-  const [active, setActive] = useState(0);
-  const [direction, setDirection] = useState('');
+const Carousel: React.FC<CarouselProps> = ({ items, images }) => {
+  const [active, setActive] = useState(2);
+  const [direction, setDirection] = useState('right');
 
   const moveLeft = () => {
-    const newActive = active - 1 < 0 ? items.length - 1 : active - 1;
-    setActive(newActive);
+    setActive(prev => prev - 1 >= 0 ? prev - 1 : items.length - 1);
     setDirection('left');
   };
 
   const moveRight = () => {
-    const newActive = (active + 1) % items.length;
-    setActive(newActive);
+    setActive(prev => (prev + 1) % items.length);
     setDirection('right');
   };
 
   const generateItems = () => {
-    const itemsToShow = [];
-    let level;
+    return items.map((item, index) => {
+      const levelDiff = active - index;
+      const level = levelDiff > 2 ? 'inactive' : `level${levelDiff}`; // Folosește 'inactive' pentru item-urile departate
+      return (
+        <CSSTransition key={item.food.id} timeout={500} classNames={direction}>
+          <Item food={item.food} level={level} img={images[item.food.id!]}/>
+        </CSSTransition>
+      );
+    });
+  };
 
-    for (let i = active - 2; i < active + 3; i++) {
-      let index = i;
-      if (i < 0) {
-        index = items.length + i; 
-      } else if (i >= items.length) {
-        index = i %  items.length; 
-      }
-
-      level = active - i;
-      itemsToShow.push(<Item key={index} food={items[index]} level={level} direction={direction} />)
-    }
-    return itemsToShow;
-  }
-  return (
+return (
     <div id="carousel" className="noselect">
-      <div className="arrow arrow-left" onClick={moveLeft}><i className="fi-arrow-left"></i></div>
+      <div className="arrow arrow-left" onClick={moveLeft}>&lt;</div>
       <TransitionGroup component={null}>
         {generateItems()}
       </TransitionGroup>
-      <div className="arrow arrow-right" onClick={moveRight}><i className="fi-arrow-right"></i></div>
+      <div className="arrow arrow-right" onClick={moveRight}>&gt;</div>
     </div>
   );
 };
 
+
 export default Carousel;
   
   interface ItemProps {
-    key: number;
     food: FoodDTO;
-    level: number; 
-    direction: string;
+    level: string; 
+    img: string;
   }
   
-  const Item: React.FC<ItemProps> = ({ key, food, level, direction }) => {
-    const className = 'item level' + level
-    return (
-      <div className={className}>
-        <CSSTransition key={food.id} timeout={500} classNames={direction}>
-            <p>{`${food.quantity} - $${food.price}`}</p>
-        </CSSTransition>
-      </div>
-    );
+  const Item: React.FC<ItemProps> = ({ food, level, img}) => {
+    const levelNumber = parseInt(level.replace('level', ''), 10); 
+    const isVisible = Math.abs(levelNumber) <= 2; 
+    const className = `item ${level} ${!isVisible ? 'hidden' : ''}`;
+  return (
+    <div className={className}>
+      <CSSTransition key={food.id} timeout={500} classNames="item-transition">
+        <div>
+          <img src={img} alt={''} style={{ width: '100px', height: '100px' }} />
+          <h1 style={{ fontSize: '0.8rem' }}>{food.name}</h1> Ajustează mărimea titlului
+        </div>
+      </CSSTransition>
+    </div>
+  );
   };
-  
-  // export default Carousel;
-                {/* <img src={this.props.food.imageUrl || 'default.jpg'} alt={this.props.food.name || ''} className="food-image"/> */}
 
-// interface FoodGalleryProps {
-//     foods: FoodDTO[];
-//     imageUrls: { [key: string]: string };
-// }
-
-// const FoodGallery: React.FC<FoodGalleryProps> = ({ foods, imageUrls }) => {
-//     const [activeIndex, setActiveIndex] = useState(0);
-//     const navigate = useNavigate();
-//     const galleryRef = useRef(null);
-
-//     // Function to calculate the class based on index
-//     const getItemLevel = (index: number) => {
-//         const diff = index - activeIndex;
-//         if (diff < 0) return `level${diff}`;
-//         return `level${diff}`;
-//     };
-
-//     const scrollLeft = () => {
-//         setActiveIndex(prevIndex => prevIndex > 0 ? prevIndex - 1 : foods.length - 1);
-//     };
-
-//     const scrollRight = () => {
-//         setActiveIndex(prevIndex => (prevIndex + 1) % foods.length);
-//     };
-
-//     const handleFoodClick = (id: string | undefined) => {
-//         navigate(`/food/${id}`);
-//     };
-
-//     return (
-//         <div id="carousel" className="noselect">
-//             <div className="arrow arrow-left" onClick={scrollLeft}>&lt;</div>
-//             <TransitionGroup component={null}>
-//                 {foods.map((food, index) => (
-//                     <CSSTransition key={food.id} timeout={500} classNames="item">
-//                         <div className={`item ${getItemLevel(index)}`} onClick={() => handleFoodClick(food.id)}>
-//                             <img src={imageUrls[food.id!] || 'default.jpg'} alt={food.name || ''} className="food-image"/>
-//                             <div className="food-info">
-//                                 <h2>{food.name}</h2>
-//                                 <p>{`${food.quantity} - $${food.price}`}</p>
-//                             </div>
-//                         </div>
-//                     </CSSTransition>
-//                 ))}
-//             </TransitionGroup>
-//             <div className="arrow arrow-right" onClick={scrollRight}>&gt;</div>
-//         </div>
-//     );
-
-    //     <div id="carousel" className="noselect">
-    //     <div className="arrow arrow-left" onClick={this.leftClick}><i className="fi-arrow-left"></i></div>
-    //     <ReactCSSTransitionGroup 
-    //         transitionName={this.state.direction}>
-    //         {this.generateItems()}
-    //     </ReactCSSTransitionGroup>
-    //     <div className="arrow arrow-right" onClick={this.rightClick}><i className="fi-arrow-right"></i></div>
-    // </div>
-
-        // <div className="main-container" ref={galleryRef}>
-        //     <div className="gallery-wrapper">
-        //         <div className="arrow arrow-left" onClick={scrollLeft}>{"<"}</div>
-        //         <div className="gallery-container">
-        //             {foods.map((food, index) => (
-        //                 <div key={food.id}
-        //                      className={`item ${getItemLevel(index)}`}
-        //                      onClick={() => handleFoodClick(food.id)}>
-        //                     <img src={imageUrls[food.id!] || 'default.jpg'} alt={food.name || ''} className="food-image"/>
-        //                     <div className="food-info">
-        //                         <h2>{food.name}</h2>
-        //                         <p>{`${food.quantity} - $${food.price}`}</p>
-        //                     </div>
-        //                 </div>
-        //             ))}
-        //         </div>
-        //         <div className="arrow arrow-right" onClick={scrollRight}>{">"}</div>
-        //     </div>
-        // </div>
-    // );
-// };
+  interface Order {
+    order: number;
+    food: FoodDTO;
+    state: 'active' | 'inactive';
+    
+  }
 
 export const FoodForm = () => {
     const { getAllFoods, downloadFoodImage, recommandedFood } = useFoodApi();
-    const [foods, setFoods] = useState<FoodDTOListRequestResponse>();
     const [imageUrls, setImageUrls] = useState<{ [key: string]: string }>({});
-    const [recommendedFood, setRecommendedFood] = useState<FoodDTO | null>(null);
-    const [recommendedImageUrl, setRecommendedImageUrl] = useState<string>('');
-    const [maxCalories, setMaxCalories] = useState<number>(600); // Default value
+    const [orders, setOrders] = useState<Order[]>([]);
+    const queryClient = new QueryClient();
 
     useEffect(() => {
-        const fetchFoods = async () => {
-            try {
-                const foodList = await getAllFoods.mutation();
-                setFoods(foodList);
-            } catch (error) {
-                console.error('Failed to fetch foods:', error);
-            }
-        };
-        fetchFoods();
-    }, []);
+      const fetchFoods = async () => {
+        try {
+          const foodListResponse = await getAllFoods.mutation();
+          if (foodListResponse.response) {
+            const newOrders = foodListResponse.response.map((food: FoodDTO, index: number) => ({
+              order: index + 1,
+              food, 
+              state: 'inactive' as 'inactive'  
+            }));
+            setOrders(newOrders);
 
-    // useEffect(() => {
-    //     const fetchImageUrls = async () => {
-    //         const urls: { [key: string]: string } = {};
-    //         for (const food of foods?.response || []) {
-    //             try {
-    //                 if (food.id !== undefined) {
-    //                     const imageUrl = await downloadFoodImage.mutation(food.id);
-    //                     const imageUrlString = URL.createObjectURL(imageUrl);
-    //                     urls[food.id] = imageUrlString;
-    //                 }
-    //             } catch (error) {
-    //                 console.error('Failed to download food image:', error);
-    //             }
-    //         }
-    //         setImageUrls(urls);
-    //     };
-    //     if (foods?.response?.length) {
-    //         fetchImageUrls();
-    //     }
-    // }, [foods, downloadFoodImage]);
+          }
+        } catch (error) {
+          console.error('Failed to fetch foods:', error);
+        }
+      };
+      fetchFoods();
+    }, [getAllFoods]);
 
-    // const fetchRecommendedFood = async () => {
-    //     try {
-    //         const response = await recommandedFood.mutation(maxCalories);
-    //         const food = response.response;
-    //         setRecommendedFood(food || null); // Set default value of null if food is undefined
-    //         const imageUrl = await downloadFoodImage.mutation(food?.id || ''); // Add null check and provide default value
-    //         const imageUrlString = URL.createObjectURL(imageUrl);
-    //         setRecommendedImageUrl(imageUrlString);
-    //     } catch (error) {
-    //         console.error('Failed to fetch recommended food:', error);
-    //     }
-    // };
-    
-  
+    useEffect(() => {
+      const fetchImageUrls = async () => {
+          const urls: { [key: string]: string } = {};
+          for (const food of orders || []) {
+              try {
+                  if (food.food.id !== undefined) {
+                      const imageUrl = await downloadFoodImage.mutation(food.food.id);
+                      const imageUrlString = URL.createObjectURL(imageUrl);
+                      urls[food.food.id] = imageUrlString;
+                  }
+              } catch (error) {
+                  console.error('Failed to download food image:', error);
+              }
+          }
+          setImageUrls(urls);
+      };
+      if (orders.length) {
+          fetchImageUrls();
+      }
+      
+    }, [orders, downloadFoodImage]);
+
     return (
-        <Carousel items={foods?.response || []}/>
+      <QueryClientProvider client={queryClient}>
+        <div className='container'> {/* Simplificare: ca un container */}
+          <Carousel items={orders} images={imageUrls}/>
+        </div>
+      </QueryClientProvider>
     );
-};
 
-
-
-
-{/* <Carousel items={items} active={0} /> */}
-// <div className="main-container">
-//     <FoodGallery foods={foods?.response || []} imageUrls={imageUrls} />
-//     {/* <FoodGallery foods={foods?.response || []} imageUrls={imageUrls} /> */}
-// </div>
-
-
-
-
-
-
-
-
-
-
-
-
-// const FoodRecommendation: React.FC<{ food: FoodDTO, imageUrl: string}> = ({ food, imageUrl }) => {
-//     const calorii = (food.kcalPer100g ?? 0) * (food.quantity ?? 0) / 100;
-//     return (
-//         <div className="recommendation-container">
-//             <img src={imageUrl || 'default.jpg'} alt={food.name ?? ''} className="recommendation-image" />
-//             <div className="recommendation-info">
-//                 <h2>{food.name}</h2>
-//                 <p>{`${food.quantity} - $${food.price}`}</p>
-//                 <p>{`Calories: ${calorii}`}</p>
-//             </div>
-//         </div>
-//     );
-// };
-
-
-// return (
-//     <div className="main-container">
-//         <FoodGallery foods={foods?.response || []} imageUrls={imageUrls} />
-//         <FoodGallery foods={foods?.response || []} imageUrls={imageUrls} />
-//         {/* <div className="recommendation-form">
-//         <input
-//                 type="text"
-//                 value={maxCalories}
-//                 onChange={(e) => setMaxCalories(Number(e.target.value))}
-//                 placeholder="Enter max calories"
-//                 className="calories-input"
-//             />
-//             <button onClick={fetchRecommendedFood}>Get Recommendation</button>
-//         </div> */}
-//         {/* {recommendedFood && (
-//             <FoodRecommendation food={recommendedFood} imageUrl={recommendedImageUrl}/>
-//         )} */}
-//     </div>
-// );
+  };
