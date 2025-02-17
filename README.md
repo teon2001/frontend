@@ -1,6 +1,8 @@
-# MobyLabWebProgramming
+# CantinaConnect App
 
-This is a example application to teach students the basics of web programming.
+This is a web application designed for managing and purchasing food from a
+university canteen. Developed using ASP.NET Core for the backend and Entity Framework for database
+interactions, the application provides a robust platform for handling various functionalities.
 
 # Prerequisites
 You will need the latest LTS version of NodeJs (https://nodejs.org/en/) and a IDE of you choice, we recommend VSCode (https://code.visualstudio.com/) with plugins for Javascript, Typescript, CSS and SonarLint or WebStorm (https://www.jetbrains.com/webstorm/).
